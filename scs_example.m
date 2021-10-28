@@ -194,7 +194,7 @@ ppframe = floor(N_lambda/numframes);  % pixels per frame
 
 figure;
 for i = 1:3
-subplot(3,2,i*2);
+subplot(3,1,i);
 hold on;
 plot(lambda,StokesINnorm(i,:));
 plot(1./sigma*1e9,[Stokeschsnorm(i,:);Stokesachsnorm(i,:)],'--');
@@ -208,27 +208,7 @@ hold off;
 xlabel('\lambda [nm]');
 ylabel(['S_',num2str(i),'/S_0 [-]']);
 xlim([lambda(1), lambda(end)]);
-ylim([-1.2 1.2]);
-end
-legend({'Reference','Channel Split*','A. C. Split*','DRM'},...
-    'NumColumns',5,'Location','South');
-
-for i = 1:3
-subplot(3,2,i*2-1);
-hold on;
-plot(lambda,StokesIN(i+1,:));
-plot(1./sigma*1e9,[Stokeschs(i+1,:);Stokesachs(i+1,:)],'--');
-plot(lambda(ppframe*(0:numframes-1)+floor(ppframe/2)),...
-  StokesW(i+1,:),'ks');
-for j = 1:numframes
-  plot(lambda(ppframe*(j-1)+[1 ppframe]),...
-    StokesW(i+1,j).*ones(1,2),'k-.');
-end
-hold off;
-xlabel('\lambda [nm]');
-ylabel(['S_',num2str(i),' [a.u.]']);
-xlim([lambda(1), lambda(end)]);
-%   ylim([-1.2 1.2]);
+ylim([-1 1]);
 end
 legend({'Reference','Channel Split*','A. C. Split*','DRM'},...
     'NumColumns',5,'Location','South');
